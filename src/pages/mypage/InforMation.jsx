@@ -9,6 +9,7 @@ import useCustomAxios from "@hooks/useCustomAxios.mjs";
 
 function InforMation() {
   const axios = useCustomAxios();
+  const { user } = useUserStore();
   const {
     register,
     watch,
@@ -35,14 +36,22 @@ function InforMation() {
     email && (await checkEmailAvailability());
   };
 
+  const onSubmit = async (formData) => {
+    try {
+      const res = await axios.put(`/users/${user.id}`, formData);
+      alert("회원 정보가 수정되었습니다.");
+    } catch (err) {
+      console.error(err.response?.data.message);
+      alert("회원 정보 수정에 실패했습니다.");
+    }
+  };
+
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = () => {
     setUser(null);
     setShowModal(false);
   };
-
-  const { user } = useUserStore();
 
   return (
     <>
@@ -69,7 +78,7 @@ function InforMation() {
             </LinkButton>
           </div>
           <br />
-          <form className={styles.form} onSubmit={handleSubmit(onsubmit)}>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <fieldset className={styles.label}>
               <label htmlFor="email">아이디(이메일)</label>
               <input
