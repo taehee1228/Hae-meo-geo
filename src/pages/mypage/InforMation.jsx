@@ -11,9 +11,9 @@ function InforMation() {
   const axios = useCustomAxios();
   const {
     register,
-    handleSubmit,
     watch,
     handleClick,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -34,6 +34,14 @@ function InforMation() {
   const handleCheckEmail = async () => {
     email && (await checkEmailAvailability());
   };
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleDelete = () => {
+    setUser(null);
+    setShowModal(false);
+  };
+
   const { user } = useUserStore();
 
   return (
@@ -176,9 +184,21 @@ function InforMation() {
                 color="Transparency"
                 size="small"
                 filled="false"
+                onClick={() => setShowModal(true)}
               >
                 회원 탈퇴하기
               </Button>
+              {showModal && (
+                <div className="modal">
+                  <div className="modal-content">
+                    <h3>정말로 회원 탈퇴하시겠습니까?</h3>
+                    <div className="modal-actions">
+                      <Button onClick={handleDelete}>확인</Button>
+                      <Button onClick={() => setShowModal(false)}>취소</Button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </form>
         </wrap>

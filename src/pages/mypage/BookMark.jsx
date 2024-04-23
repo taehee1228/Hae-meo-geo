@@ -38,7 +38,9 @@ function BookMark() {
                 bookmarks.map((bookmark, index) => (
                   <li key={index}>
                     <span>북마크</span>
-                    <Link to={`/bookmark/${bookmark.id}`}>{bookmark.name}</Link>
+                    <Link to={`/bookmark/${bookmark._id}`}>
+                      {bookmark.name}
+                    </Link>
                   </li>
                 ))}
             </ul>
@@ -52,48 +54,20 @@ function BookMark() {
               </wrap>
             </fieldset>
 
-            <fieldset className={styles.item}>
-              <div className={styles.img}></div>
-              <span>김치찌개</span>
-              <wrap>
-                <div className={styles.tag}>끓이기</div>
-                <div className={styles.tag}>찌기</div>
-              </wrap>
-            </fieldset>
-
-            <fieldset className={styles.item}>
-              <div className={styles.img}></div>
-              <span>김치찌개</span>
-              <wrap>
-                <div className={styles.tag}>끓이기</div>
-                <div className={styles.tag}>찌기</div>
-              </wrap>
-            </fieldset>
-
-            <fieldset className={styles.item}>
-              <div className={styles.img}></div>
-              <span>김치찌개</span>
-              <wrap>
-                <div className={styles.tag}>끓이기</div>
-                <div className={styles.tag}>찌기</div>
-              </wrap>
-            </fieldset>
-            <fieldset className={styles.item}>
-              <div className={styles.img}></div>
-              <span>김치찌개</span>
-              <wrap>
-                <div className={styles.tag}>끓이기</div>
-                <div className={styles.tag}>찌기</div>
-              </wrap>
-            </fieldset>
-            <fieldset className={styles.item}>
-              <div className={styles.img}></div>
-              <span>김치찌개</span>
-              <wrap>
-                <div className={styles.tag}>끓이기</div>
-                <div className={styles.tag}>찌기</div>
-              </wrap>
-            </fieldset>
+            {bookmarks &&
+              bookmarks.map((bookmark, index) => (
+                <fieldset key={index} className={styles.item}>
+                  <div className={styles.img}></div>
+                  <span>{bookmark.name}</span>
+                  <wrap>
+                    {bookmark.tags.map((tag, tagIndex) => (
+                      <div key={tagIndex} className={styles.tag}>
+                        {tag}
+                      </div>
+                    ))}
+                  </wrap>
+                </fieldset>
+              ))}
           </form>
         </wrap>
       </div>
