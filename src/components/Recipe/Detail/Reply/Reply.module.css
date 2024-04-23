@@ -179,15 +179,13 @@
 
 .attachWr.act button {
   display: block;
-  top: 0;
-  right: 0;
 }
 
 @media (max-width: 767px) {
 
   .replyWr {
     font-size: 1.4rem;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   .attachWr {
@@ -197,6 +195,11 @@
   .attachWr label {
     border-radius: 50%;
     background-size: 4rem;
+  }
+
+  .attachWr button {
+    top: 0;
+    right: 0;
   }
 
 }
